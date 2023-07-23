@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>Your Quotes</header>
+        <blockquote id="quote">Quotes</blockquote>
+        <span id="author">Author Name</span>
+        <div>
+            <button onclick="Quote_generator()"  id="btn">Generate Quote</button>
+        </div>
+    </div>
+
+    <script>
+
+        async function Quote_generator()
+        {
+            const quote=document.getElementById('quote');
+            const author=document.getElementById('author');
+            const api_url="https://api.quotable.io/random";
+
+            try{
+                const response=await fetch(api_url);
+                // console.log(response);
+                const dataset=await response.json();
+                console.log(dataset);
+
+                quote.innerHTML=dataset.content;
+                author.innerHTML=dataset.author;
+            }
+
+            catch(error){
+                console.log(error);
+            }
+        }
+
+        Quote_generator();
+
+    </script>
+
+</body>
+</html>
